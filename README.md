@@ -16,3 +16,9 @@ Dieses Projekt implementiert einen einfachen Ping-Pong-Service mit Python. Der P
    git clone https://github.com/FaKiieZ/ping-pong.git
    cd ping-pong
    ```
+
+## Ausführen
+
+1. Wechsle in das Verzeichnis `src` mit dem Befehl `cd src`.
+2. Führe den Befehl `python pong.py` aus.
+3. Führe in einem neuen Terminal den Befel `python ping.py` aus.
