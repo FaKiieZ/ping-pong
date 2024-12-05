@@ -12,6 +12,7 @@ Dieses Projekt implementiert einen einfachen Ping-Pong-Service mit Python. Der P
 ## Installation
 
 1. Klone das Repository:
+
    ```bash
    git clone https://github.com/FaKiieZ/ping-pong.git
    cd ping-pong
