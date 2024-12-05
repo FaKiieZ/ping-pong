@@ -6,14 +6,17 @@ def start_pong_server(host, port):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
             server_socket.bind((host, port))
-            server_socket.settimeout(1.0)  # Set a short timeout for accept()
+            server_socket.settimeout(2.0)  # Set a short timeout for accept()
             server_socket.listen(1)
+            isWaiting = False
+            
             print(f"Pong server is listening on {host}:{port}...")
-    
+
             while True:
                 # Accept connections with a timeout to allow interruption
                 try:
                     conn, addr = server_socket.accept()
+                    isWaiting = False
                     print(f"Connected by {addr}")
 
                     with conn:
@@ -32,6 +35,9 @@ def start_pong_server(host, port):
                             except ValueError:
                                 conn.sendall(b"Error: Invalid number")
                 except socket.timeout:
+                    if not isWaiting:
+                        isWaiting = True
+                        print("Waiting for new connections... Cancel with Ctrl+C\n")
                     pass  # Periodically check for interrupts while waiting for connections
                 except KeyboardInterrupt:
                     print("\nKeyboardInterrupt received. Shutting down server...")

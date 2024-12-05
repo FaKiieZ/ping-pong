@@ -1,5 +1,5 @@
 import socket
-import threading
+import time
  
 def start_proxy_server(proxy_host, proxy_port, pong_host, pong_port):
     print(f"Proxy server is starting on {proxy_host}:{proxy_port}, forwarding to Pong at {pong_host}:{pong_port}...")
@@ -9,11 +9,16 @@ def start_proxy_server(proxy_host, proxy_port, pong_host, pong_port):
             proxy_socket.bind((proxy_host, proxy_port))
             proxy_socket.settimeout(1.0)  # Set a short timeout for accept()
             proxy_socket.listen(1)
+
+            isWaiting = False
+
             print(f"Proxy server is listening on {proxy_host}:{proxy_port}...")
  
             while True:
+                # Accept connections with a timeout to allow interruption
                 try:
                     conn, addr = proxy_socket.accept()
+                    isWaiting = False
                     print(f"Ping connected from {addr}")
  
                     with conn:
@@ -38,6 +43,9 @@ def start_proxy_server(proxy_host, proxy_port, pong_host, pong_port):
                                 print(f"Proxy sent back to Ping: {pong_response.decode()}")
  
                 except socket.timeout:
+                    if not isWaiting:
+                        isWaiting = True
+                        print("Waiting for new connections... Cancel with Ctrl+C\n")
                     pass  # Periodically check for interrupts while waiting for connections
                 except KeyboardInterrupt:
                     print("\nKeyboardInterrupt received. Shutting down proxy server...")
