@@ -11,29 +11,28 @@ def start_pong_server(host, port):
             print(f"Pong server is listening on {host}:{port}...")
     
             while True:
+                # Accept connections with a timeout to allow interruption
                 try:
-                    # Accept connections with a timeout to allow interruption
-                    try:
-                        conn, addr = server_socket.accept()
-                        print(f"Connected by {addr}")
+                    conn, addr = server_socket.accept()
+                    print(f"Connected by {addr}")
 
-                        with conn:
-                            while True:
-                                data = conn.recv(1024)
-                                if not data:
-                                    break
-                                try:
-                                    number = int(data.decode())
-                                    print(f"Received: {number}")
-                                    response = number + 1
+                    with conn:
+                        while True:
+                            data = conn.recv(1024)
+                            if not data:
+                                break
+                            try:
+                                number = int(data.decode())
+                                print(f"Received: {number}")
+                                response = number + 1
 
-                                    time.sleep(1)  # Wait for 1 second before the next iteration
-                                    conn.sendall(str(response).encode())
-                                    print(f"Sent: {response}")
-                                except ValueError:
-                                    conn.sendall(b"Error: Invalid number")
-                    except socket.timeout:
-                        pass  # Periodically check for interrupts while waiting for connections
+                                time.sleep(1)  # Wait for 1 second before the next iteration
+                                conn.sendall(str(response).encode())
+                                print(f"Sent: {response}")
+                            except ValueError:
+                                conn.sendall(b"Error: Invalid number")
+                except socket.timeout:
+                    pass  # Periodically check for interrupts while waiting for connections
                 except KeyboardInterrupt:
                     print("\nKeyboardInterrupt received. Shutting down server...")
                     break
