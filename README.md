@@ -2,7 +2,7 @@
 
 ## Projektbeschreibung
 
-Dieses Projekt implementiert einen einfachen Ping-Pong-Service mit Python. Der Ping-Dienst sendet eine Zahl `n`, und der Pong-Dienst antwortet mit `n + 1`. Ausserdem gibt es die Möglichkeit `proxy.py` als "middleman" einzusetzen. Dieser empfänsgt die Zahl von `ping.py` und sendet diese ohne zu Verändern an `pong.py`, das gleiche umgekehrt.
+Dieses Projekt implementiert einen einfachen Ping-Pong-Service mit Python. Der Ping-Dienst sendet eine Zahl `n`, und der Pong-Dienst antwortet mit `n + 1`. Ausserdem gibt es die Möglichkeit `proxy.py` als "middleman" einzusetzen. Dieser empfängt die Zahl von `ping.py` und sendet diese ohne zu verändern an `pong.py`, das gleiche umgekehrt.
 
 ## Voraussetzungen
 
