@@ -40,16 +40,16 @@ def start_ping_client(host, port, max_spin):
         print(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
-    SERVER_IP = input("Please input the pong server ip address (empty equals to default: 127.0.0.1): ") or '127.0.0.1'
+    SERVER_IP = input("Please input the pong server or proxy ip address (empty equals to default: 127.0.0.1): ") or '127.0.0.1'
 
     try:
-        SERVER_PORT = int(input("Please input the pong server port (empty equals to default: 12345): ") or '12345')
+        SERVER_PORT = int(input("Please input the pong server or proxy port (empty equals to default: 5000): ") or '5000')
     except ValueError:
-        print("Error: Invalid port number, using default value: 12345")
-        SERVER_PORT = 12345
+        print("Error: Invalid port number, using default value: 5000")
+        SERVER_PORT = 5000
 
     try:
-        MAX_SPIN = int(input("Please input how many times a ping should be being sent to the pong server (empty equals to default: 10): ") or '10')
+        MAX_SPIN = int(input("Please input how many times a ping should be being sent to the pong server or proxy (empty equals to default: 10): ") or '10')
     except ValueError:
         print("Error: Invalid number, using default value: 10")
         MAX_SPIN = 10
